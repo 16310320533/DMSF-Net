@@ -13,7 +13,7 @@ class DataPreprocessor:
     1. Parsing JSON annotations to extract lesion boundaries.
     2. Rasterizing polygon coordinates into binary segmentation masks.
     3. Performing Region of Interest (ROI) cropping to standardize input spatial domains.
-    4. Organizing processed data into stratified splits (Train/Valid/Test) for reproducibility.
+    4. Organizing processed data into stratified splits (Train/Test) for reproducibility.
     """
 
     def __init__(self, raw_data_dir, output_dir, splits=None):
@@ -23,11 +23,11 @@ class DataPreprocessor:
         Args:
             raw_data_dir (str): Path to the raw dataset containing 'images' and 'labels' subdirectories.
             output_dir (str): Path where the processed (cropped) dataset will be saved.
-            splits (list): List of dataset splits to process (default: ['train', 'valid', 'test']).
+            splits (list): List of dataset splits to process (default: ['train', 'test']).
         """
         self.base_dir = raw_data_dir
         self.output_dir = output_dir
-        self.splits = splits if splits else ["train", "valid", "test"]
+        self.splits = splits if splits else ["train", "test"]
 
         # Ensure output directory structure exists
         self._init_directories()
@@ -176,4 +176,5 @@ if __name__ == "__main__":
         raw_data_dir=RAW_DATASET_PATH,
         output_dir=PROCESSED_DATASET_PATH
     )
+
     preprocessor.run()
